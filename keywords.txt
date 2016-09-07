@@ -1,0 +1,37 @@
+#######################################
+# Syntax Coloring Map For S65Display
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+S65Display	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+init	KEYWORD2
+drawStart	KEYWORD2
+draw	KEYWORD2
+drawStop	KEYWORD2
+setArea	KEYWORD2
+setCursor	KEYWORD2
+clear	KEYWORD2
+drawPixel	KEYWORD2
+drawLine	KEYWORD2
+drawRect	KEYWORD2
+fillRect	KEYWORD2
+drawCircle	KEYWORD2
+fillCircle	KEYWORD2
+drawChar	KEYWORD2
+drawText	KEYWORD2
+drawTextPGM	KEYWORD2
+drawMLText	KEYWORD2
+drawMLTextPGM	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
