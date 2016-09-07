@@ -79,6 +79,7 @@ void draw_grid_cell_name_position(uint16_t grid_cell_name_position, uint8_t x) {
 void draw_grid_cell_name_value(uint16_t grid_cell_name_value, uint8_t y) {
     char tmp[5];
     float value;
+    //нулевое значение не печатаем
     if (grid_cell_name_value > 0) {
         value = grid_cell_name_value;
         value = value / 1000;
@@ -126,7 +127,7 @@ void draw_grid() {
 }
 
 // Нарисовать точку-значение на графике
-void grid_clear_after_shift(){
+void grid_clear_after_shift() {
     uint8_t x, y;
     //Если начался сдвиг - выполняем очистку
     if (grid_frame_shift_pixels > 0) {
@@ -141,16 +142,16 @@ void grid_clear_after_shift(){
         //------- end debug
 
         //Очистка колонди сдвига
-        lcd.drawLine(x, grid_frame_y1 + 3 + 9 +8, x, grid_frame_y2, RGB(0, 0, 0));
+        lcd.drawLine(x, grid_frame_y1 + 3 + 9 + 8, x, grid_frame_y2, RGB(0, 0, 0));
         //прорисовка линий
         // draw X line
         for (y = grid_frame_y1; y >= grid_frame_y2; y = y - grid_cell_value_pixels) {
             lcd.drawPixel(x, y, RGB(0, 150, 150));
         }
         //прорисовка Y линий
-        if ((current_grid_position_pixel % grid_cell_position_pixels) == 0){
+        if ((current_grid_position_pixel % grid_cell_position_pixels) == 0) {
             lcd.drawLine(x, grid_frame_y1 + 8, x, grid_frame_y2, RGB(0, 150, 150));
-            if (current_grid_position_pixel > 0){
+            if (current_grid_position_pixel > 0) {
                 draw_grid_cell_name_position(counter_position - 1, x);
             } else {
                 draw_grid_cell_name_position(counter_position - 1, grid_frame_x2);
@@ -165,19 +166,19 @@ void grid_clear_after_shift(){
 }
 
 //Рассчитывает Y-пиксель значения в фрейме
-uint8_t grid_calculate_pixel_value(uint16_t value){
+uint8_t grid_calculate_pixel_value(uint16_t value) {
     //рассчитываем значение для сетки
     uint16_t grid_value = value / grid_values_for_pixel;
     return grid_frame_y1 - grid_value;
 }
 
 //Рассчитывает X-пиксель позиции  в фрейме, сдвигает график, если нужно
-uint8_t grid_calculate_pixel_position(){
+uint8_t grid_calculate_pixel_position() {
     //Если начался сдвиг - продолжаем сдвигать
     if (grid_frame_shift_pixels > 0) {
         current_grid_position_pixel = grid_frame_shift_pixels - 1;
         //делаем сдвиг
-        lcd.scrollP(grid_frame_x1,(grid_frame_x2 - grid_frame_x1),grid_frame_shift_pixels);
+        lcd.scrollP(grid_frame_x1, (grid_frame_x2 - grid_frame_x1), grid_frame_shift_pixels);
         grid_frame_shift_pixels++;
         //если сдвиг больше ширины рамки - обнуляем сдвиг
         if (grid_frame_shift_pixels > grid_frame_width) {
@@ -226,14 +227,14 @@ void loop() {
     Serial.print('Test1');
     Serial.println('Test2');
     uint16_t x, direction = 10;
-    uint8_t  delay_ = 1;
+    uint8_t delay_ = 1;
     for (x = 0; x < 100; x++) {
-        draw_grid_value(x*10);
+        draw_grid_value(x * 10);
     }
     for (x = 100; x > 60; x--) {
-        draw_grid_value(x*10);
+        draw_grid_value(x * 10);
     }
-    x=600;
+    x = 600;
 
     while (true) {
         if (x > 1700) direction = -10;
